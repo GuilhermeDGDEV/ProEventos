@@ -1,5 +1,4 @@
-<h2>Eventos</h2>
-<hr />
+<app-titulo [titulo]="'Eventos'"></app-titulo>
 
 <div class="form-group mb-2 d-flex align-items-center filter-group">
   <label>Filtro: </label>
@@ -15,11 +14,8 @@
   <thead>
     <tr class="table-dark">
       <th>
-        <button
-          type="button"
-          class="btn btn-outline-light btn-sm"
-          (click)="changeImageView()"
-        >
+        <button type="button" class="btn btn-outline-light btn-sm" (click)="changeImageView()">
+          <i class="{{ imageShow ? 'fa fa-eye-slash' : 'fa fa-eye' }}"></i>
           {{ imageShow ? "ocultar" : "exibir" }}
         </button>
       </th>
@@ -44,15 +40,19 @@
           [style.margin.px]="imageMargin"
         />
       </td>
-      <td>{{ evento.eventoId }}</td>
+      <td>{{ evento.id }}</td>
       <td>{{ evento.tema }}</td>
       <td>{{ evento.local }}</td>
-      <td>{{ evento.dataEvento }}</td>
+      <td>{{ evento.dataEvento | DateTimeFormatPipe }}</td>
       <td>{{ evento.qtdPessoas }}</td>
-      <td>{{ evento.lote }}</td>
+      <td>{{ evento.lotes[0].nome }}</td>
       <td>
-        <button type="button" class="btn btn-primary btn-sm me-2">Editar</button>
-        <button type="button" class="btn btn-danger btn-sm">Excluir</button>
+        <button type="button" class="btn btn-primary btn-sm me-2" tooltip="Editar">
+          <i class="fa fa-edit"></i>
+        </button>
+        <button type="button" class="btn btn-danger btn-sm" tooltip="Excluir" (click)="openModal(template)">
+          <i class="fa fa-trash"></i>
+        </button>
       </td>
     </tr>
   </tbody>
@@ -66,3 +66,11 @@
     </tfoot>
   </ng-template>
 </table>
+
+<ng-template #template>
+  <div class="modal-body text-center">
+    <p>Tem certeza que quer deletar o evento?</p>
+    <button type="button" class="btn btn-light me-2" (click)="confirm()">Sim</button>
+    <button type="button" class="btn btn-primary" (click)="decline()">Não</button>
+  </div>
+</ng-template>

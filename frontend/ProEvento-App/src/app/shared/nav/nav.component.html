@@ -1,0 +1,32 @@
+<div class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a routerLink="dashboard" class="navbar-brand">ProEventos</a>
+    <button class="navbar-toggler" (click)="isCollapsed = !isCollapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle Navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="navbarNav" class="collapse navbar-collapse" [collapse]="isCollapsed" [isAnimated]="true">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item" routerLinkActive="active"><a routerLink="eventos" aria-current="page" class="nav-link">Eventos</a></li>
+        <li class="nav-item" routerLinkActive="active"><a routerLink="palestrantes" class="nav-link">Palestrantes</a></li>
+        <li class="nav-item" routerLinkActive="active"><a routerLink="contatos" class="nav-link">Contatos</a></li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown" dropdown>
+          <a id="dropdown-perfil" dropdownToggle class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Guilherme
+          </a>
+          <div *dropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" routerLink="perfil">
+              Perfil
+            </a>
+            <div role="separator" class="divider"></div>
+            <a class="dropdown-item" routerLink="dashboard">
+              Sair
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
