@@ -28,7 +28,7 @@ namespace ProEventos.API.Controllers
             }
             catch (Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, 
+                return StatusCode(StatusCodes.Status500InternalServerError, 
                     $"Erro ao recuperar eventos. Erro: {ex.Message}");
             }  
         }
@@ -43,7 +43,7 @@ namespace ProEventos.API.Controllers
             }
             catch(Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                return StatusCode(StatusCodes.Status500InternalServerError,
                     $"Erro ao recuperar evento. Erro: {ex.Message}");
             }
         }
@@ -58,7 +58,7 @@ namespace ProEventos.API.Controllers
             }
             catch (Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                return StatusCode(StatusCodes.Status500InternalServerError,
                     $"Erro ao recuperar eventos. Erro: {ex.Message}");
             }
         }
@@ -73,7 +73,7 @@ namespace ProEventos.API.Controllers
             }
             catch (Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                return StatusCode(StatusCodes.Status500InternalServerError,
                     $"Erro ao adicionar evento. Erro: {ex.Message}");
             }
         }
@@ -88,7 +88,7 @@ namespace ProEventos.API.Controllers
             }
             catch (Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                return StatusCode(StatusCodes.Status500InternalServerError,
                     $"Erro ao atualizar evento. Erro: {ex.Message}");
             }
         }
@@ -102,7 +102,7 @@ namespace ProEventos.API.Controllers
             }
             catch (Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                return StatusCode(StatusCodes.Status500InternalServerError,
                     $"Erro ao deletar evento. Erro: {ex.Message}");
             }
         }
