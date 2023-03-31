@@ -1,2 +1,27 @@
 @import "node_modules/bootstrap/scss/bootstrap";
 @import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
+@import "node_modules/ngx-toastr/toastr.css";
+@import "node_modules/ngx-spinner/animations/ball-scale-multiple.css";
+
+.popover {
+  position: absolute;
+  top: 0;
+  left: 0 #{"/* rtl:ignore */"};
+}
+
+.popover-arrow {
+  position: absolute;
+}
+
+.tooltip {
+  position: absolute;
+}
+
+.tooltip-arrow {
+  position: absolute;
+}
+
+.loading-text > p {
+  font-size: 20px;
+  color: white;
+}

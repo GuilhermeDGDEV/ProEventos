@@ -1,5 +1,4 @@
-<h2>Eventos</h2>
-<hr>
+<app-titulo [titulo]="'Eventos'"></app-titulo>
 <div class="form-group">
     <label class="form-label">Filtro:</label>
     <input type="text" class="form-control mb-2" placeholder="buscar" [(ngModel)]="listFilter">
@@ -10,6 +9,8 @@
       <th>
         <button type="button" class="btn btn-outline-light btn-sm"
         (click)="showImg = !showImg">
+          <i class="fa {{ showImg ? 'fa-eye' : 'fa-eye-slash' }}"></i>
+          <fa-icon [icon]="showImg ? faEye : faEyeSlash"></fa-icon>
           {{ showImg ? "ocultar" : "exibir" }}
         </button>
       </th>
@@ -28,15 +29,21 @@
         <img [collapse]="!showImg" [isAnimated]="true" src="assets/{{ evento.imagemURL }}"
         [style.width.px]="widthImg" [style.margin.px]="marginImg">
       </td>
-      <td>{{ evento.eventoId }}</td>
+      <td>{{ evento.id }}</td>
       <td>{{ evento.tema }}</td>
       <td>{{ evento.local }}</td>
-      <td>{{ evento.dateEvento }}</td>
+      <td>{{ evento.dataEvento | DateTimeFormatPipe }}</td>
       <td>{{ evento.qtdPessoas }}</td>
-      <td>{{ evento.lote }}</td>
+      <td>{{ evento.lotes[0] ? evento.lotes[0].nome : "" }}</td>
       <td>
-        <button class="btn btn-primary btn-sm me-2">Editar</button>
-        <button class="btn btn-danger btn-sm">Excluir</button>
+        <div class="btn-group">
+          <button class="btn btn-primary btn-sm" tooltip="Editar">
+            <fa-icon [icon]="faEdit"></fa-icon>
+          </button>
+          <button class="btn btn-danger btn-sm" tooltip="Excluir" (click)="openModal(templateModal)">
+            <fa-icon [icon]="faTrash"></fa-icon>
+          </button>
+        </div>
       </td>
     </tr>
   </tbody>
@@ -48,3 +55,11 @@
     </tr>
   </tfoot>
 </table>
+
+<ng-template #templateModal>
+  <div class="modal-body text-center">
+    <p>Tem certeza que quer deletar os eventos?</p>
+    <button class="btn" (click)="confirm()">Sim</button>
+    <button class="btn btn-primary" (click)="decline()">Não</button>
+  </div>
+</ng-template>
