@@ -1,7 +1,16 @@
-@import "node_modules/bootstrap/scss/bootstrap";
+//@import "node_modules/bootstrap/scss/bootstrap";
 @import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
 @import "node_modules/ngx-toastr/toastr.css";
 @import "node_modules/ngx-spinner/animations/ball-scale-multiple.css";
+@import "node_modules/bootswatch/dist/cosmo/bootstrap.min.css";
+
+a {
+  text-decoration: none !important;
+}
+
+label {
+  margin-bottom: 0.5rem;
+}
 
 .popover {
   position: absolute;
@@ -24,4 +33,26 @@
 .loading-text > p {
   font-size: 20px;
   color: white;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-inline .form-control {
+  display: inline-block;
+  width: auto;
+  vertical-align: middle;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -5px;
+  margin-left: -5px;
+}
+
+.form-row > .col {
+  padding-left: 5px;
+  padding-right: 5px;
 }
