@@ -16,7 +16,6 @@ export class NavComponent {
   constructor(private router: Router) {}
 
   public showMenu(): boolean {
-    console.log(this.router.url)
     return this.router.url !== '/user/login';
   }
 }

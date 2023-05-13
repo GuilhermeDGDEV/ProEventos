@@ -12,6 +12,10 @@ label {
   margin-bottom: 0.5rem;
 }
 
+input[type=checkbox] {
+  cursor: pointer;
+}
+
 .popover {
   position: absolute;
   top: 0;

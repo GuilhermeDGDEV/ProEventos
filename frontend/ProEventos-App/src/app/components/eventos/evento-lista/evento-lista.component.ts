@@ -8,8 +8,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { faEye, faEyeSlash, faEdit, faTrash, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
-import { Evento } from '../../../model/Evento';
-import { EventoService } from '../../../services/evento.service';
+import { Evento } from '@app/model/Evento';
+import { EventoService } from '@app/services/evento.service';
 
 @Component({
   selector: 'app-evento-lista',

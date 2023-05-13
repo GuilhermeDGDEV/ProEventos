@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Evento } from '../model/Evento';
+import { Evento } from '@app/model/Evento';
 
 @Injectable()
 export class EventoService {
