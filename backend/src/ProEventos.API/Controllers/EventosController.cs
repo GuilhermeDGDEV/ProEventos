@@ -15,12 +15,13 @@ public class EventosController : ControllerBase
         _eventoService = eventoService;
     }
 
-    [HttpGet]
+    [HttpGet]   
     public async Task<IActionResult> Get()
     {
         try
         {
             var eventos = await _eventoService.GetAllEventosAsync(true);
+
             if (eventos == null) return NoContent();
 
             return Ok(eventos);
@@ -114,7 +115,7 @@ public class EventosController : ControllerBase
             var evento = await _eventoService.GetEventoByIdAsync(id);
             if (evento == null) return NoContent();
             return await _eventoService.DeleteEvento(id) ?
-                Ok("Evento deletado.") : throw new Exception("Erro ao deletar evento.");
+                Ok(new { message = "Deletado" }) : throw new Exception("Erro ao deletar evento.");
         }
         catch (Exception ex)
         {

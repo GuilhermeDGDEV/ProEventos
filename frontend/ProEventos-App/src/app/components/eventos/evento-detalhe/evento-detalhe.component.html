@@ -33,11 +33,14 @@
           <input
             type="datetime"
             class="form-control"
+            value="{{ evento.dataEvento | DateTimeFormatPipe }}"
             [ngClass]="{'is-invalid': isInvalid(f.dataEvento)}"
             formControlName="dataEvento"
             placeholder=""
+            [bsConfig]="datePickerConfig"
+            bsDatepicker
           />
-          <div *ngIf="f.dataEvento?.errors?.required" class="invalid-feedback">Data e Hora é obrigatório</div>
+          <div *ngIf="f.dataEvento?.errors?.required" class="invalid-feedback">Data e hora é obrigatório</div>
         </div>
       </div>
       <div class="row">

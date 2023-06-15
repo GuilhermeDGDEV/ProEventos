@@ -12,15 +12,19 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { ptBrLocale } from 'ngx-bootstrap/locale';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EventosComponent } from './components/eventos/eventos.component';
 import { PalestrantesComponent } from './components/palestrantes/palestrantes.component';
-import { NavComponent } from './shared/nav/nav.component';
 
 import { EventoService } from './services/evento.service';
 
 import { DateTimeFormatPipe } from './helpers/date-time-format.pipe';
+import { NavComponent } from './shared/nav/nav.component';
 import { TituloComponent } from './shared/titulo/titulo.component';
 import { ContatosComponent } from './components/contatos/contatos.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -31,6 +35,7 @@ import { UserComponent } from './components/user/user.component';
 import { LoginComponent } from './components/user/login/login.component';
 import { RegistrationComponent } from './components/user/registration/registration.component';
 
+defineLocale('pt-br', ptBrLocale);
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,7 +71,8 @@ import { RegistrationComponent } from './components/user/registration/registrati
       preventDuplicates: true,
       progressBar: true
     }),
-    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
+    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }),
+    BsDatepickerModule.forRoot()
   ],
   providers: [
     EventoService

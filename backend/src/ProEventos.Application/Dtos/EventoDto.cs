@@ -10,7 +10,7 @@ public class EventoDto
     public string? Local { get; set; }
 
     [Required(ErrorMessage = "{0} é obrigatório")]
-    public string? DataEvento { get; set; }
+    public DateTime? DataEvento { get; set; }
 
     [Required(ErrorMessage = "{0} é obrigatório")]
     [StringLength(50, MinimumLength = 4, ErrorMessage = "{0} deve ter entre 4 e 50 caracteres")]
