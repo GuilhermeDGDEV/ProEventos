@@ -48,7 +48,7 @@
           <img
             [collapse]="!showImg"
             [isAnimated]="true"
-            src="assets/{{ evento.imagemURL }}"
+            src="assets/{{ evento.imagemURL ?? 'foto.png' }}"
             [style.width.px]="widthImg"
             [style.margin.px]="marginImg"
           />

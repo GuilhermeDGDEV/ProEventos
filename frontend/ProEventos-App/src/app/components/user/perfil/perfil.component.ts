@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, AbstractControlOptions, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ValidatorField } from '@app/helpers/ValidatorField';
 
 @Component({
@@ -44,7 +44,7 @@ export class PerfilComponent implements OnInit {
     this.form.reset();
   }
 
-  public isInvalid(formControl: any): boolean {
+  public isInvalid(formControl: FormControl | AbstractControl): boolean {
     return formControl?.errors && formControl?.touched;
   }
 

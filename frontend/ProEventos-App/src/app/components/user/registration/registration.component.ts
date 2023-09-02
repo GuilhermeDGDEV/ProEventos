@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormBuilder, AbstractControlOptions } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder, AbstractControlOptions, AbstractControl, FormControl } from '@angular/forms';
 import { ValidatorField } from '@app/helpers/ValidatorField';
 
 @Component({
@@ -36,7 +36,7 @@ export class RegistrationComponent implements OnInit {
     }, formOptions);
   }
 
-  public isInvalid(formControl: any): boolean {
+  public isInvalid(formControl: FormControl | AbstractControl): boolean {
     return formControl?.errors && formControl?.touched;
   }
 }

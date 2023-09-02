@@ -11,6 +11,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgxCurrencyModule } from 'ngx-currency';
 
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { defineLocale } from 'ngx-bootstrap/chronos';
@@ -22,6 +23,7 @@ import { EventosComponent } from './components/eventos/eventos.component';
 import { PalestrantesComponent } from './components/palestrantes/palestrantes.component';
 
 import { EventoService } from './services/evento.service';
+import { LoteService } from './services/lote.service';
 
 import { DateTimeFormatPipe } from './helpers/date-time-format.pipe';
 import { NavComponent } from './shared/nav/nav.component';
@@ -72,10 +74,22 @@ defineLocale('pt-br', ptBrLocale);
       progressBar: true
     }),
     NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }),
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    NgxCurrencyModule.forRoot({
+      align: "left",
+      allowNegative: false,
+      allowZero: true,
+      decimal: ",",
+      precision: 2,
+      prefix: "R$ ",
+      suffix: "",
+      thousands: ".",
+      nullable: true,
+    })
   ],
   providers: [
-    EventoService
+    EventoService,
+    LoteService
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

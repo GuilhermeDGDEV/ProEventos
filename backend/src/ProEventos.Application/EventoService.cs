@@ -70,9 +70,9 @@ public class EventoService : IEventoService
     {
         try
         {
-            var evento = await _eventoPersist.GetEventoByIdAsync(eventoId, false);
-            if (evento == null) throw new Exception("Evento a ser deletado não foi encontrado!");
-
+            var evento = await _eventoPersist.GetEventoByIdAsync(eventoId, false) 
+                ?? throw new Exception("Evento a ser deletado não foi encontrado!");
+                
             _geralPersist.Delete(evento);
             return await _geralPersist.SaveChangesAsync();
         }
