@@ -25,9 +25,13 @@
     "@fortawesome/free-brands-svg-icons": "^6.5.2",
     "@fortawesome/free-regular-svg-icons": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
+    "any": "^1.0.0",
     "bootstrap": "^5.2.3",
+    "dependecy": "^0.0.2",
     "express": "^4.18.2",
     "ngx-bootstrap": "^18.0.2",
+    "ngx-spinner": "^17.0.0",
+    "ngx-toastr": "^19.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.10"
