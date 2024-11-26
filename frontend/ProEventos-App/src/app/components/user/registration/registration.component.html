@@ -9,47 +9,97 @@
 
 	<div class="col-md-6">
 
-		<form class="p-1">
+		<form class="p-1" [formGroup]="form">
 			<div class="pb-2 d-block d-md-none">
 				<h3 class="border-bottom">Cadastro de Usuário</h3>
 			</div>
 			<div class="form-row">
 				<div class="form-group col col-sm-6">
 					<label>Primeiro Nome</label>
-					<input type="text" class="form-control" placeholder="Insira o Primeiro nome" />
+					<input type="text" class="form-control"
+					formControlName="primeiroNome"
+					[ngClass]="{'is-invalid': f.primeiroNome.errors && f.primeiroNome.touched}" 
+					placeholder="Insira o Primeiro nome" />
+					<div class="invalid-feedback">
+                        Primeiro nome é obrigatório
+                    </div>
 				</div>
 				<div class="form-group col col-sm-6">
 					<label>Último nome</label>
-					<input type="text" class="form-control" placeholder="Insira o Último nome" />
+					<input type="text" class="form-control"
+					formControlName="ultimoNome"
+					[ngClass]="{'is-invalid': f.ultimoNome.errors && f.ultimoNome.touched}" 
+					placeholder="Insira o Último nome" />
+					<div class="invalid-feedback">
+                        Último nome é obrigatório
+                    </div>
 				</div>
 			</div>
 			<div class="form-group col">
-				<label for="">Email:</label>
-				<input class="form-control" type="text" placeholder="Insira o Nome Completo" />
+				<label for="">E-mail:</label>
+				<input class="form-control" type="text"
+				formControlName="email"
+				[ngClass]="{'is-invalid': f.email.errors && f.email.touched}"
+				placeholder="Insira o Nome Completo" />
+				<div class="invalid-feedback">
+					@if (f.email.errors?.required) {
+						E-mail é obrigatório
+					} @else if (f.email.errors?.email) {
+						E-mail inválido
+					}
+				</div>
 			</div>
 			<div class="form-group col">
 				<label for="">Usuario:</label>
-				<input class="form-control" type="text" placeholder="Insira o nome de Usuário" />
+				<input class="form-control" type="text"
+				formControlName="usuario"
+				[ngClass]="{'is-invalid': f.usuario.errors && f.usuario.touched}"
+				placeholder="Insira o nome de Usuário" />
+				<div class="invalid-feedback">
+					Nome de usuário é obrigatório
+				</div>
 			</div>
 			<div class="form-row">
 				<div class="form-group col col-sm-6">
 					<label for="">Senha:</label>
-					<input class="form-control" type="password" placeholder="Digite uma Senha" />
+					<input class="form-control" 
+					formControlName="senha"
+					[ngClass]="{'is-invalid': f.senha.errors && f.senha.touched}"
+					type="password" placeholder="Digite uma Senha" />
+					<div class="invalid-feedback">
+						@if (f.senha.errors?.required) {
+							Senha é obrigatória
+						} @else if (f.senha.errors?.minlength) {
+							Senha deve ter no mínimo 6 caracteres
+						}
+					</div>
 				</div>
 				<div class="form-group col col-sm-6">
 					<label for="">Confirmar Senha:</label>
-					<input class="form-control" type="password" placeholder="Confirme a Senha" />
+					<input class="form-control" 
+					formControlName="confirmarSenha"
+					[ngClass]="{'is-invalid': f.confirmarSenha.errors && f.confirmarSenha.touched}"
+					type="password" placeholder="Confirme a Senha" />
+					<div class="invalid-feedback">
+						@if (f.confirmarSenha.errors?.required) {
+							Confirme a senha
+						} @else if (f.confirmarSenha.errors?.mustMatch) {
+							Senhas não conferem
+						}
+					</div>
 				</div>
 			</div>
 			<div class="form-row p-1 mb-3">
 				<div class="custom-control custom-checkbox">
-					<input type="checkbox" class="custom-control-input me-1" id="customCheck1">
+					<input type="checkbox" class="custom-control-input me-1" 
+					formControlName="termosDeUso"
+					id="customCheck1">
 					<label class="custom-control-label">Eu concordo com os <a href="#">Termos de Uso</a>.</label>
 				</div>
 			</div>
 			<div class="form-row">
 				<div class="form-group col col-12">
-					<button class="btn btn-lg btn-success btn-block px-5 w-100">
+					<button class="btn btn-lg btn-success btn-block px-5 w-100" [disabled]="!form.valid">
 						Registar
 					</button>
 				</div>

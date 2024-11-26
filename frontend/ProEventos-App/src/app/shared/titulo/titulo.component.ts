@@ -19,7 +19,7 @@ export class TituloComponent {
   public botaoListar!: boolean;
 
   @Input()
-  public iconClass!: IconDefinition;
+  public iconClass?: IconDefinition;
 
   constructor(private router: Router) {}
 

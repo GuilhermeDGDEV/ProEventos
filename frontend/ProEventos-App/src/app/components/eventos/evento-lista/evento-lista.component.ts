@@ -1,6 +1,6 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { EventoService } from '../../../services/evento.service';
-import { Evento } from '../../../models/Evento';
+import { EventoService } from '@app/services/evento.service';
+import { Evento } from '@app/models/Evento';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { faEye, faEyeSlash, faEdit, faTrash, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   templateUrl: './evento-lista.component.html',
   styleUrl: './evento-lista.component.scss'
 })
-export class EventoListaComponent {
+export class EventoListaComponent implements OnInit {
 
   public faEye: IconDefinition = faEye;
   public faEyeSlash: IconDefinition = faEyeSlash;
