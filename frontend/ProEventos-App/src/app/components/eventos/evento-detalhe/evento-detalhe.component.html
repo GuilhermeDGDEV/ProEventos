@@ -4,8 +4,7 @@
             <div class="form-row">
                 <div class="form-group col col-md-12">
                     <label>Tema</label>
-                    <input type="text" class="form-control"
-                    [ngClass]="{'is-invalid': f.tema.errors && f.tema.touched}" 
+                    <input type="text" class="form-control" [ngClass]="cssValidator(f.tema)" 
                     formControlName="tema" placeholder="Insira o Tema">
                     <div class="invalid-feedback">
                         @if (f.tema.errors?.required) {
@@ -21,8 +20,7 @@
             <div class="form-row">
                 <div class="form-group col col-md-8">
                     <label>Local</label>
-                    <input type="text" class="form-control is-invalid"
-                    [ngClass]="{'is-invalid': f.local.errors && f.local.touched}"
+                    <input type="text" class="form-control" [ngClass]="cssValidator(f.local)"
                     formControlName="local" placeholder="">
                     <div class="invalid-feedback">
                         Local é obrigatório
@@ -30,9 +28,9 @@
                 </div>
                 <div class="form-group col col-md-4">
                     <label>Data e Hora</label>
-                    <input type="datetime" class="form-control is-invalid"
-                    [ngClass]="{'is-invalid': f.dataEvento.errors && f.dataEvento.touched}"
-                    formControlName="dataEvento" placeholder="">
+                    <input type="datetime" class="form-control" [ngClass]="cssValidator(f.dataEvento)"
+                    formControlName="dataEvento" placeholder="" value="{{ evento.dataEvento | DateFormatPipe }}"
+                    bsDatepicker [bsConfig]="bsConfig">
                     <div class="invalid-feedback">
                         Data e hora é obrigatório
                     </div>
@@ -41,8 +39,7 @@
             <div class="form-row">
                 <div class="form-group col col-md-2">
                     <label>Qtd. pessoas</label>
-                    <input type="number" class="form-control is-invalid" 
-                    [ngClass]="{'is-invalid': f.qtdpessoas.errors && f.qtdpessoas.touched}"
+                    <input type="number" class="form-control" [ngClass]="cssValidator(f.qtdpessoas)"
                     formControlName="qtdpessoas" placeholder="">
                     <div class="invalid-feedback">
                         @if (f.qtdpessoas.errors?.required) {
@@ -54,8 +51,7 @@
                 </div>
                 <div class="form-group col col-md-4">
                     <label>Telefone</label>
-                    <input type="text" class="form-control is-invalid" 
-                    [ngClass]="{'is-invalid': f.telefone.errors && f.telefone.touched}"
+                    <input type="text" class="form-control" [ngClass]="cssValidator(f.telefone)"
                     formControlName="telefone" placeholder="(000) 90000-0000">
                     <div class="invalid-feedback">
                         Telefone é obrigatório
@@ -63,8 +59,7 @@
                 </div>
                 <div class="form-group col col-md-6">
                     <label>E-mail</label>
-                    <input type="text" class="form-control is-invalid" 
-                    [ngClass]="{'is-invalid': f.email.errors && f.email.touched}"
+                    <input type="text" class="form-control" [ngClass]="cssValidator(f.email)"
                     formControlName="email" placeholder="e-mail">
                     <div class="invalid-feedback">
                         @if (f.email.errors?.required) {
@@ -81,8 +76,7 @@
                 <button class="btn btn-outline-secondary mr-auto border" (click)="resetForm($event)">
                     Cancelar Alteração
                 </button>
-                <button class="btn btn-success" [disabled]="!form.valid">
-                    <span class="spinner-border spinner-border-sm mr-1"></span>
+                <button class="btn btn-success" [disabled]="!form.valid" (click)="salvarAlteracao()">
                     Salvar Evento
                 </button>
             </div>

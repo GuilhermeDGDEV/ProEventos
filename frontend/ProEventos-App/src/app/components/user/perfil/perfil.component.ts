@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControlOptions, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ValidatorField } from '@app/helpers/ValidatorField';
 
 @Component({
@@ -31,6 +31,10 @@ export class PerfilComponent {
       senha: [''],
       confirmarSenha: ['']
     }, formOptions);
+  }
+
+  public cssValidator(campoForm: FormControl): object {
+    return {'is-invalid': campoForm.errors && campoForm.touched}
   }
 
 }

@@ -99,7 +99,7 @@ public class EventosController(IEventoService eventoService) : ControllerBase
                 return NoContent();
 
             return await _eventoService.DeleteEvento(id) ?
-                Ok("Deletado") :
+                Ok(new { message = "Deletado" }) :
                 throw new Exception("Ocorreu um problema não específico ao tentar deletar evento.");
         }
         catch (Exception ex)

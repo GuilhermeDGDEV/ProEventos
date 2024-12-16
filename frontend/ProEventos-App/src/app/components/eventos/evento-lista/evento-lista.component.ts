@@ -25,6 +25,7 @@ export class EventoListaComponent implements OnInit {
 
   public eventos: Evento[] = [];
   public eventosFiltrados: Evento[] = [];
+  public eventoId: number = 0;
   public larguraImagem: number = 150;
   public margemImagem: number = 2;
   public exibirImagem: boolean = true;
@@ -48,22 +49,18 @@ export class EventoListaComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-    this.getEventos();
+    this.carregarEventos();
   }
 
-  public getEventos(): void {
+  public carregarEventos(): void {
     this.spinner.show();
     this.eventoService.getEventos().subscribe({
       next: (_eventos: Evento[]) => {
         this.eventos = _eventos;
         this.eventosFiltrados = this.eventos;
       },
-      error: () => {
-        this.spinner.hide();
-        this.toastr.error('Erro ao carregar os Eventos', 'Erro!');
-      },
-      complete: () => this.spinner.hide()
-    });
+      error: () => this.toastr.error('Erro ao carregar os Eventos', 'Erro!')
+    }).add(() => this.spinner.hide());
   }
 
   public alterarImagem(): void {
@@ -78,13 +75,24 @@ export class EventoListaComponent implements OnInit {
     );
   }
 
-  public openModal(template: TemplateRef<void>) {
+  public openModal(event: MouseEvent, template: TemplateRef<any>, eventoId: number) {
+    event.stopPropagation();
+    this.eventoId = eventoId;
     this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
   }
 
   public confirm(): void {
     this.modalRef?.hide();
-    this.toastr.success('O Evento foi deletado com sucesso', 'Deletado');
+    this.spinner.show();
+    this.eventoService.deleteEvento(this.eventoId).subscribe({
+      next: (result: any) => {
+        if (result.message === 'Deletado') {
+          this.toastr.success('O Evento foi deletado com sucesso', 'Deletado');
+          this.carregarEventos();
+        }
+      },
+      error: () => this.toastr.error(`Erro ao tentar deletar o evento ${this.eventoId}`, 'Erro')
+    }).add(() => this.spinner.hide());
   }
  
   public decline(): void {
