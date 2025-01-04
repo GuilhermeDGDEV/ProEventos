@@ -78,8 +78,7 @@ public class EventoService(IGeralPersist geralPersist, IEventoPersist eventoPers
         {
             var eventos = await _eventoPersist.GetAllEventosAsync(includePalestrantes);
             if (eventos == null) return null;
-            var resultado = _mapper.Map<EventoDto[]>(eventos);
-            return resultado;
+            return _mapper.Map<EventoDto[]>(eventos);
         }
         catch (Exception ex)
         {
@@ -93,8 +92,7 @@ public class EventoService(IGeralPersist geralPersist, IEventoPersist eventoPers
         {
             var eventos = await _eventoPersist.GetAllEventosByTemaAsync(tema, includePalestrantes);
             if (eventos == null) return null;
-            var resultado = _mapper.Map<EventoDto[]>(eventos);
-            return resultado;
+            return _mapper.Map<EventoDto[]>(eventos);
         }
         catch (Exception ex)
         {
@@ -108,9 +106,7 @@ public class EventoService(IGeralPersist geralPersist, IEventoPersist eventoPers
         {
             var evento = await _eventoPersist.GetEventoByIdAsync(eventoId, includePalestrantes);
             if (evento == null) return null;
-
-            var resultado = _mapper.Map<EventoDto>(evento);
-            return resultado;
+            return _mapper.Map<EventoDto>(evento);
         }
         catch (Exception ex)
         {

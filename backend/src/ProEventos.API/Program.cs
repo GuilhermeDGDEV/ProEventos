@@ -20,7 +20,9 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddScoped<IGeralPersist, GeralPersist>();
 builder.Services.AddScoped<IEventoPersist, EventoPersist>();
+builder.Services.AddScoped<ILotePersist, LotePersist>();
 builder.Services.AddScoped<IEventoService, EventoService>();
+builder.Services.AddScoped<ILoteService, LoteService>();
 
 builder.Services.AddCors();
 builder.Services.AddEndpointsApiExplorer();
