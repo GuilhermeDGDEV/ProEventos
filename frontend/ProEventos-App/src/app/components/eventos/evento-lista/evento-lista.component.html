@@ -38,13 +38,14 @@
             @for (evento of eventosFiltrados; track eventosFiltrados) {
             <tr (click)="detalheEventos(evento.id)">
                 <td class="d-none d-md-table-cell">
-                    <img [collapse]="!exibirImagem" [isAnimated]="true" src="/assets/{{evento.imagemURL}}"
+                    <img [collapse]="!exibirImagem" [isAnimated]="true"
+                        [src]="mostraImagem(evento.imagemURL)"
                         [style.width.px]="larguraImagem" [style.margin.px]="margemImagem" alt="foto do evento">
                 </td>
                 <td>{{evento.id}}</td>
                 <td>{{evento.tema}}</td>
                 <td class="d-none d-md-table-cell">{{evento.local}}</td>
-                <td>{{evento.dataEvento | DateFormatPipe}}</td>
+                <td>{{evento.dataEvento}}</td>
                 <td class="d-none d-md-table-cell">{{evento.qtdpessoas}}</td>
                 <td class="d-none d-md-table-cell">{{(evento.lotes[0] ? evento.lotes[0].nome : "") | uppercase}}</td>
                 <td>

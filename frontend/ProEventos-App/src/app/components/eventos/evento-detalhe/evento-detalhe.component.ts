@@ -11,6 +11,8 @@ import { faMoneyBillWave, faPlusCircle, faWindowClose } from '@fortawesome/free-
 import { Lote } from '@app/models/Lote';
 import { LoteService } from '@app/services/lote.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { environment } from '@environments/environment';
+import { DateTimeFormatPipe } from '@app/helpers/date-time-format.pipe';
 
 @Component({
   selector: 'app-evento-detalhe',
@@ -25,6 +27,8 @@ export class EventoDetalheComponent implements OnInit {
   public loteAtualIndice: number = 0;
   public form!: FormGroup;
   public estadoSalvar: string = 'post';
+  public imagemURL: (string | ArrayBuffer) = '/assets/img/upload.png';
+  public file: (File | null) = null;
 
   public faMoneyBillWave: IconDefinition = faMoneyBillWave;
   public faPlusCircle: IconDefinition = faPlusCircle;
@@ -44,7 +48,7 @@ export class EventoDetalheComponent implements OnInit {
     return {
       isAnimated: true,
       adaptivePosition: true,
-      dateInputFormat: 'DD/MM/YYYY hh:mm a',
+      dateInputFormat: 'DD/MM/YYYY HH:mm a',
       containerClass: 'theme-default',
       showWeekNumbers: false
     }
@@ -86,6 +90,7 @@ export class EventoDetalheComponent implements OnInit {
       qtdpessoas: ['', [Validators.required, Validators.max(120000)]],
       telefone: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
+      imagemURL: [''],
       lotes: this.fb.array([])
     });
   }
@@ -126,6 +131,10 @@ export class EventoDetalheComponent implements OnInit {
           this.evento.lotes.forEach(lote => {
             this.lotes.push(this.criarLote(lote));
           });
+
+          if (this.evento.imagemURL) {
+            this.imagemURL = environment.apiURL + 'Resources/images/' + this.evento.imagemURL;
+          }
         },
         error: () => this.toastr.error('Erro ao tentar carregar evento.', 'Erro!')
       }).add(() => this.spinner.hide());
@@ -154,7 +163,10 @@ export class EventoDetalheComponent implements OnInit {
       this.spinner.show();
       this.loteService.saveLotes(this.eventoId, this.form.value.lotes)
         .subscribe({
-          next: () => this.toastr.success('Lotes salvos com sucesso!', 'Sucesso'),
+          next: () => {
+            this.toastr.success('Lotes salvos com sucesso!', 'Sucesso');
+            this.router.navigate([`/eventos/detalhe/${this.eventoId}`]);
+          },
           error: (err) => {
             this.toastr.error('Erro ao salvar lotes', 'Erro');
             console.error(err);
@@ -184,6 +196,44 @@ export class EventoDetalheComponent implements OnInit {
 
   public declineDeleteLote(): void {
     this.modalRef?.hide();
+  }
+
+  public onFileChange(event: Event): void {
+    const reader = new FileReader();
+
+    reader.onload = (e: ProgressEvent<FileReader>) =>
+      this.imagemURL = e.target?.result ?? "";
+
+    const htmlElement = (<HTMLInputElement>event.target);
+    this.file = htmlElement.files ? htmlElement.files[0] : null;
+    reader.readAsDataURL(this.file ?? new Blob());
+
+    this.uploadImagem();
+  }
+
+  public uploadImagem(): void {
+    this.spinner.show();
+    this.eventoService.postUpload(this.eventoId, this.file).subscribe({
+      next: (eventoRetorno: Evento) => {
+        this.toastr.success('Imagem atualizada com sucesso!', 'Sucesso');
+        this.router.navigate([`/eventos/detalhe/${eventoRetorno.id}`]);
+      },
+      error: (e) => {
+        this.toastr.error('Erro ao fazer upload de imagem.', 'Erro');
+        console.log(e)
+      }
+    }).add(() => this.spinner.hide());
+  }
+
+  public retornaData(data: any): string {
+    try {
+      const retorno = new Date(data);
+      return retorno.toLocaleString() != 'Invalid Date' ?
+        retorno.toLocaleString().replace(',', '') : data;
+    }
+    catch (e) {
+      return data;
+    }
   }
 
 }
