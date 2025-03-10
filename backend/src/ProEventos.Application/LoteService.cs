@@ -6,9 +6,8 @@ using ProEventos.Persistence.Contratos;
 
 namespace ProEventos.Application;
 
-public class LoteService(IGeralPersist geralPersist, ILotePersist lotePersist, IMapper mapper) : ILoteService
+public class LoteService(ILotePersist lotePersist, IMapper mapper) : ILoteService
 {
-    private readonly IGeralPersist _geralPersist = geralPersist;
     private readonly ILotePersist _lotePersist = lotePersist;
     private readonly IMapper _mapper = mapper;
 
@@ -18,8 +17,8 @@ public class LoteService(IGeralPersist geralPersist, ILotePersist lotePersist, I
         {
             var lote = await _lotePersist.GetLoteByIds(eventoId, loteId) 
                 ?? throw new Exception("Lote não encontrado.");
-            _geralPersist.Delete(lote);
-            return await _geralPersist.SaveChangesAsync();
+            _lotePersist.Delete(lote);
+            return await _lotePersist.SaveChangesAsync();
         }
         catch (Exception ex)
         {
@@ -88,8 +87,8 @@ public class LoteService(IGeralPersist geralPersist, ILotePersist lotePersist, I
         {
             var lote = _mapper.Map<Lote>(model);
             lote.EventoId = eventoId;
-            _geralPersist.Add(lote);
-            await _geralPersist.SaveChangesAsync();
+            _lotePersist.Add(lote);
+            await _lotePersist.SaveChangesAsync();
         }
         catch (Exception ex)
         {
@@ -104,8 +103,8 @@ public class LoteService(IGeralPersist geralPersist, ILotePersist lotePersist, I
             var lote = lotes.FirstOrDefault(l => l.Id == model.Id);
             model.EventoId = eventoId;
             _mapper.Map(model, lote);
-            _geralPersist.Update(lote);
-            await _geralPersist.SaveChangesAsync();
+            _lotePersist.Update(lote);
+            await _lotePersist.SaveChangesAsync();
         }
         catch (Exception ex)
         {

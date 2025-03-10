@@ -5,7 +5,7 @@ using ProEventos.Persistence.Contextos;
 
 namespace ProEventos.Persistence;
 
-public class PalestrantePersist(ProEventosContext context) : IPalestrantePersist
+public class PalestrantePersist(ProEventosContext context) : GeralPersist(context), IPalestrantePersist
 {
     private readonly ProEventosContext _context = context;
 
@@ -25,7 +25,7 @@ public class PalestrantePersist(ProEventosContext context) : IPalestrantePersist
     {
         IQueryable<Palestrante> query = _context.Palestrantes
             .Include(p => p.RedesSociais)
-            .Where(p => p.Nome.ToLower().Contains(nome.ToLower()))
+            .Where(p => p.User.NomeCompleto.ToLower().Contains(nome.ToLower()))
             .OrderBy(p => p.Id);
 
         if (includeEventos)

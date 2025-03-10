@@ -5,7 +5,7 @@ using ProEventos.Persistence.Contextos;
 
 namespace ProEventos.Persistence;
 
-public class LotePersist(ProEventosContext context) : ILotePersist
+public class LotePersist(ProEventosContext context) : GeralPersist(context), ILotePersist
 {
     private readonly ProEventosContext _context = context;
 
