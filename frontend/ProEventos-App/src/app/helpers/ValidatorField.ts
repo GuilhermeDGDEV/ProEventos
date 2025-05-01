@@ -1,4 +1,4 @@
-import { AbstractControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 
 export class ValidatorField {
     static mustMatch(controlName: string, matchingControlName: string): any {
@@ -19,5 +19,9 @@ export class ValidatorField {
 
             return null;
         };
+    }
+
+    static cssValidator(campoForm: FormControl): object {
+        return { 'is-invalid': campoForm.errors && campoForm.touched };
     }
 }

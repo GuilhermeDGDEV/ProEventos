@@ -33,14 +33,14 @@ public class AccountService(
         }
     }
 
-    public async Task<UserDto> CreateAccountAsync(UserDto userDto)
+    public async Task<UserUpdateDto> CreateAccountAsync(UserDto userDto)
     {
         try
         {
             var user = _mapper.Map<User>(userDto);
             var result = await _userManager.CreateAsync(user, userDto.Password);
             if (result.Succeeded)
-                return _mapper.Map<UserDto>(user);
+                return _mapper.Map<UserUpdateDto>(user);
 
             return null;
         }

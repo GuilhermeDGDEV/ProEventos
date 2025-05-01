@@ -9,7 +9,7 @@
 
 	<div class="col-md-6">
 
-		<form class="p-1" [formGroup]="form">
+		<form class="p-1" [formGroup]="form" (ngSubmit)="register()">
 			<div class="pb-2 d-block d-md-none">
 				<h3 class="border-bottom">Cadastro de Usuário</h3>
 			</div>
@@ -45,7 +45,7 @@
 			</div>
 			<div class="form-group col">
 				<label for="">Usuario:</label>
-				<input class="form-control" type="text" formControlName="usuario" [ngClass]="cssValidator(f.usuario)"
+				<input class="form-control" type="text" formControlName="userName" [ngClass]="cssValidator(f.userName)"
 				placeholder="Insira o nome de Usuário" />
 				<div class="invalid-feedback">
 					Nome de usuário é obrigatório
@@ -54,24 +54,24 @@
 			<div class="form-row">
 				<div class="form-group col col-sm-6">
 					<label for="">Senha:</label>
-					<input class="form-control" formControlName="senha" [ngClass]="cssValidator(f.senha)"
+					<input class="form-control" formControlName="password" [ngClass]="cssValidator(f.password)"
 					type="password" placeholder="Digite uma Senha" />
 					<div class="invalid-feedback">
-						@if (f.senha.errors?.required) {
+						@if (f.password.errors?.required) {
 							Senha é obrigatória
-						} @else if (f.senha.errors?.minlength) {
-							Senha deve ter no mínimo 6 caracteres
+						} @else if (f.password.errors?.minlength) {
+							Senha deve ter no mínimo 4 caracteres
 						}
 					</div>
 				</div>
 				<div class="form-group col col-sm-6">
 					<label for="">Confirmar Senha:</label>
-					<input class="form-control" formControlName="confirmarSenha" [ngClass]="cssValidator(f.confirmarSenha)"
+					<input class="form-control" formControlName="confirmPassword" [ngClass]="cssValidator(f.confirmPassword)"
 					type="password" placeholder="Confirme a Senha" />
 					<div class="invalid-feedback">
-						@if (f.confirmarSenha.errors?.required) {
+						@if (f.confirmPassword.errors?.required) {
 							Confirme a senha
-						} @else if (f.confirmarSenha.errors?.mustMatch) {
+						} @else if (f.confirmPassword.errors?.mustMatch) {
 							Senhas não conferem
 						}
 					</div>
@@ -87,7 +87,7 @@
 			</div>
 			<div class="form-row">
 				<div class="form-group col col-12">
-					<button class="btn btn-lg btn-success btn-block px-5 w-100" [disabled]="!form.valid">
+					<button class="btn btn-lg btn-success btn-block px-5 w-100" type="submit" [disabled]="!form.valid">
 						Registar
 					</button>
 				</div>

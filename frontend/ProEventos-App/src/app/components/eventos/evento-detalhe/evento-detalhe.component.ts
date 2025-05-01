@@ -116,7 +116,7 @@ export class EventoDetalheComponent implements OnInit {
   }
 
   public cssValidator(campoForm: FormControl | AbstractControl | null): object {
-    return { 'is-invalid': campoForm?.errors && campoForm?.touched }
+    return { 'is-invalid': campoForm?.errors && campoForm?.touched };
   }
 
   public carregarEvento(): void {

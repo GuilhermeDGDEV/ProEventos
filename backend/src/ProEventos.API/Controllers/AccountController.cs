@@ -41,7 +41,12 @@ public class AccountController(IAccountService accountService, ITokenService tok
 
             var user = await _accountService.CreateAccountAsync(userDto);
             if (user != null)
-                return Ok(user);
+                return Ok(new
+                {
+                    user.UserName,
+                    user.PrimeiroNome,
+                    Token = _tokenService.CreateToken(user).Result
+                });
 
             return BadRequest("Usuário não criado, tente novamente mais tarde!");
         }
@@ -62,7 +67,7 @@ public class AccountController(IAccountService accountService, ITokenService tok
             if (user == null) return Unauthorized("Usuário não encontrado.");
 
             var result = await _accountService.CheckUserPasswordAsync(user, userLoginDto.Password);
-            if (!result.Succeeded) return Unauthorized("Senha inválida");
+            if (!result.Succeeded) return Unauthorized("Senha inválida.");
 
             return Ok(new
             {

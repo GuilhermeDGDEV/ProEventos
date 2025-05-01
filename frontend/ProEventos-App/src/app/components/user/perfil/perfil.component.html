@@ -93,8 +93,8 @@
 					</div>
 					<div class="form-group col col-sm-4">
 						<label>Telefone</label>
-						<input type="text" formControlName="telefone" class="form-control" 
-						[ngClass]="cssValidator(f.telefone)"/>
+						<input type="text" formControlName="phoneNumber" class="form-control" 
+						[ngClass]="cssValidator(f.phoneNumber)"/>
 						<div class="invalid-feedback">
 							Telefone é obrigatório
 						</div>
@@ -127,12 +127,12 @@
 				<div class="form-row">
 					<div class="form-group col col-sm">
 						<label>Senha</label>
-						<input type="password" formControlName="senha" class="form-control" />
+						<input type="password" formControlName="password" class="form-control" />
 					</div>
 					<div class="form-group col col-sm">
 						<label>Confirmar Senha</label>
-						<input type="password" formControlName="confirmarSenha" class="form-control"
-						[ngClass]="cssValidator(f.confirmarSenha)" />
+						<input type="password" formControlName="confirmPassword" class="form-control"
+						[ngClass]="cssValidator(f.confirmPassword)" />
 						<div class="invalid-feedback">
 							Senhas não conferem
 						</div>

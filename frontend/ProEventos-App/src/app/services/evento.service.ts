@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, take } from 'rxjs';
 import { Evento } from '@app/models/Evento';
@@ -38,7 +38,6 @@ export class EventoService {
   }
 
   public postUpload(eventoId: number, file: any): Observable<Evento> {
-    // const fileToUpload = file[0] as File;
     const formData = new FormData();
     formData.append('file', file);
     return this.http.post<Evento>(`${this.baseURL}/upload-image/${eventoId}`, formData).pipe(take(1));

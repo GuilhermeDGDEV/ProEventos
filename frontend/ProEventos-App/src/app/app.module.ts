@@ -1,6 +1,6 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
@@ -31,6 +31,9 @@ import { ptBrLocale } from 'ngx-bootstrap/locale';
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { LoteService } from './services/lote.service';
 import { NgxCurrencyDirective, provideEnvironmentNgxCurrency } from 'ngx-currency';
+import { AccountService } from './services/account.service';
+import { jwtInterceptor } from './interceptors/jwt.interceptor';
+import { HomeComponent } from './components/home/home.component';
 
 defineLocale('pt-br', ptBrLocale);
 
@@ -49,7 +52,8 @@ defineLocale('pt-br', ptBrLocale);
     DashboardComponent,
     UserComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -73,9 +77,10 @@ defineLocale('pt-br', ptBrLocale);
     NgxCurrencyDirective,
   ],
   providers: [
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([jwtInterceptor])),
     EventoService,
     LoteService,
+    AccountService,
     provideEnvironmentNgxCurrency({
       prefix: 'R$ ',
       thousands: '.',
