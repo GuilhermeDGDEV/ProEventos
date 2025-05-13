@@ -10,8 +10,8 @@ export class ValidatorField {
             if (matchingControl.errors && !matchingControl.errors['mustMatch']) {
                 return null;
             }
-
-            if (control.value !== matchingControl.value) {
+            
+            if ((control.value ?? '') !== (matchingControl.value ?? '')) {
                 matchingControl.setErrors({ mustMatch: true });
             } else {
                 matchingControl.setErrors(null);

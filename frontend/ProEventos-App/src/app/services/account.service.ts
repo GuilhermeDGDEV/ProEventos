@@ -38,7 +38,6 @@ export class AccountService {
   public logout(): void {
     localStorage.removeItem('user');
     this.currentUserSource.next(null);
-    //this.currentUserSource.complete();
   }
 
   public setCurrentUser(user: User): void {
@@ -54,9 +53,7 @@ export class AccountService {
 
   public updateUser(model: UserUpdate): Observable<void> {
     return this.http.put<UserUpdate>(this.baseURL + 'updateUser', model)
-      .pipe(take(1), map((user: UserUpdate) => {
-        this.setCurrentUser(user);
-      }));
+      .pipe(take(1), map((user: UserUpdate) => this.setCurrentUser(user)));
   }
 
 }

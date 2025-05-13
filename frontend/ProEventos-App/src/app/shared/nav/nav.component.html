@@ -13,6 +13,9 @@
         <ul class="navbar-nav me-auto">
           @if ((accountService.currentUser$ | async) !== null) {
             <li class="nav-item" routerLinkActive="active">
+              <a class="nav-link" routerLink="dashboard">Dashboard</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
               <a class="nav-link" aria-current="page" routerLink="/eventos/lista">Eventos</a>
             </li>
             <li class="nav-item" routerLinkActive="active">
@@ -20,9 +23,6 @@
             </li>
             <li class="nav-item" routerLinkActive="active">
               <a class="nav-link" routerLink="contatos">Contatos</a>
-            </li>
-            <li class="nav-item" routerLinkActive="active">
-              <a class="nav-link" routerLink="dashboard">Dashboard</a>
             </li>
           }
         </ul>
@@ -39,7 +39,7 @@
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {{ (accountService.currentUser$ | async)?.userName | titlecase }}
               </a>
-              <div *dropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <div *dropdownMenu class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
                 <a class="dropdown-item" routerLink="/user/perfil">
                   Perfil
                 </a>

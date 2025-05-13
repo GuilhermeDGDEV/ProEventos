@@ -88,6 +88,9 @@ public class AccountController(IAccountService accountService, ITokenService tok
     {
         try
         {
+            if (userUpdateDto.UserName != User.GetUserName())
+                return Unauthorized("Usuário inválido");
+
             var user = await _accountService.GetUserByUserNameAsync(User.GetUserName());
             if (user == null) return Unauthorized("Usuário inválido.");
 
@@ -95,7 +98,12 @@ public class AccountController(IAccountService accountService, ITokenService tok
             if (userReturn == null)
                 return NoContent();
 
-            return Ok(userReturn);
+            return Ok(new
+            {
+                userReturn.UserName,
+                userReturn.PrimeiroNome,
+                Token = _tokenService.CreateToken(userReturn).Result
+            });
         }
         catch (Exception ex)
         {

@@ -88,7 +88,6 @@ defineLocale('pt-br', ptBrLocale);
       align: 'left'
     }),
   ],
-  bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

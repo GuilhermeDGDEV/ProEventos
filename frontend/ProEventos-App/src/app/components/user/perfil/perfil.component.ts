@@ -34,12 +34,13 @@ export class PerfilComponent implements OnInit {
     }
     
     this.form = this.fb.group({
-      titulo: ['', [Validators.required]],
+      userName: [''],
+      titulo: ['NaoInformado', [Validators.required]],
       primeiroNome: ['', [Validators.required]],
       ultimoNome: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       phoneNumber: ['', [Validators.required]],
-      funcao: ['', [Validators.required]],
+      funcao: ['NaoInformado', [Validators.required]],
       descricao: ['', [Validators.required]],
       password: [''],
       confirmPassword: ['']
@@ -50,18 +51,39 @@ export class PerfilComponent implements OnInit {
     this.carregarUsuario();
   }
 
-  public carregarUsuario(): void {
+  private carregarUsuario(): void {
     this.spinner.show();
     this.accountService.getUser().subscribe({
       next: (userRetorno: UserUpdate) => {
         this.userUpdate = userRetorno;
         this.form.patchValue(this.userUpdate);
-      }
+      },
+      error: console.error
     }).add(() => this.spinner.hide());
   }
 
   public cssValidator(campoForm: FormControl): object {
     return { 'is-invalid': campoForm.errors && campoForm.touched };
+  }
+
+  public onSubmit(): void {
+    this.atualizarUsuario();
+  }
+
+  public atualizarUsuario(): void {
+    this.userUpdate = { ...this.form.value };
+    this.spinner.show();
+    this.accountService.updateUser(this.userUpdate).subscribe({
+      next: () => this.toastr.success('Usuário atualizado!', 'Sucesso'),
+      error: (err) => {
+        this.toastr.error(err.error);
+        console.error(err);
+      }
+    }).add(() => this.spinner.hide());
+  }
+
+  public voltar(): void {
+    history.back();
   }
 
 }
